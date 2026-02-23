@@ -56,7 +56,6 @@ export default function List({ list, syncFirestore }) {
       className="bg-[#ebecf0] rounded-2xl p-3 w-[300px] shadow-lg"
     >
 
-      {/* LIST HEADER */}
       <div className="flex justify-between items-center mb-3">
 
         {editing?(
@@ -85,7 +84,6 @@ export default function List({ list, syncFirestore }) {
 
       </div>
 
-      {/* ✅ PEACH INNER LIST AREA */}
       <div className="bg-rose-50 rounded-xl p-2 space-y-3 max-h-[70vh] overflow-y-auto">
         {list.cards.map(card=>(
           <CardItem

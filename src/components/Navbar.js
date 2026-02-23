@@ -17,7 +17,6 @@ export default function Navbar() {
   return (
     <div className="bg-slate-800 text-white px-6 py-3 flex justify-between items-center shadow sticky top-0 z-50">
 
-      {/* LEFT */}
       <div className="flex items-center gap-6">
         <h1
           onClick={() => navigate("/boards")}
@@ -31,7 +30,6 @@ export default function Navbar() {
         </span>
       </div>
 
-      {/* RIGHT */}
       <div className="flex items-center gap-4">
 
         {user && (
