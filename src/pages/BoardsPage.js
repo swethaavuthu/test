@@ -24,7 +24,6 @@ export default function BoardsPage() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState("");
 
-  /* ================= LOAD USER BOARDS ================= */
 
   useEffect(() => {
 
@@ -48,7 +47,6 @@ export default function BoardsPage() {
 
   }, []);
 
-  /* ================= CREATE BOARD ================= */
 
   const createBoard = async () => {
 
@@ -63,7 +61,6 @@ export default function BoardsPage() {
     setCreating(false);
   };
 
-  /* ================= EDIT BOARD ================= */
 
   const startEdit = board => {
     setEditingId(board.id);
@@ -81,14 +78,12 @@ export default function BoardsPage() {
     setEditingId(null);
   };
 
-  /* ================= DELETE BOARD ================= */
 
   const deleteBoard = async id => {
     if (!window.confirm("Delete this board?")) return;
     await deleteDoc(doc(db, "boards", id));
   };
 
-  /* ================= UI ================= */
 
   return (
     <>
