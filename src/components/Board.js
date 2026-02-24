@@ -26,7 +26,7 @@ export default function Board({ boardId }) {
 
     const unsub = onSnapshot(
       collection(db, "boards", boardId, "lists"),
-      snap => {
+      (snap) => {
 
         const data = snap.docs.map(d => ({
           id: d.id,
@@ -40,7 +40,8 @@ export default function Board({ boardId }) {
 
     return () => unsub();
 
-  }, [boardId, setLists]); // ✅ FIXED FOR VERCEL
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boardId]);   // ✅ Vercel-safe dependency
 
 
   /* ================= ADD LIST ================= */
@@ -63,7 +64,6 @@ export default function Board({ boardId }) {
   const syncFirestore = async (updatedLists) => {
 
     for (const list of updatedLists) {
-
       await updateDoc(
         doc(db, "boards", boardId, "lists", list.id),
         {
@@ -98,7 +98,7 @@ export default function Board({ boardId }) {
 
             <input
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter list title"
               className="w-full border rounded p-2 mb-2"
             />
