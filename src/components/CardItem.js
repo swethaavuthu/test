@@ -259,6 +259,7 @@ export default function CardItem({ card, listId, syncFirestore }) {
         <div className="flex justify-center mb-3">
           <img
             src={card.image}
+            alt="image"
             className="
               w-10 h-10 object-cover
               rounded-full
