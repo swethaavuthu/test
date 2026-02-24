@@ -40,7 +40,7 @@ export default function Board({ boardId }) {
 
     return () => unsub();
 
-  }, [boardId]);
+  }, [boardId, setLists]); // ✅ FIXED FOR VERCEL
 
 
   /* ================= ADD LIST ================= */
@@ -60,7 +60,7 @@ export default function Board({ boardId }) {
 
   /* ================= FIRESTORE SYNC ================= */
 
-  const syncFirestore = async updatedLists => {
+  const syncFirestore = async (updatedLists) => {
 
     for (const list of updatedLists) {
 
@@ -74,6 +74,8 @@ export default function Board({ boardId }) {
     }
   };
 
+
+  /* ================= UI ================= */
 
   return (
     <>
@@ -103,7 +105,7 @@ export default function Board({ boardId }) {
 
             <button
               onClick={addList}
-              className="bg-blue-600 text-white w-full p-2 rounded"
+              className="bg-blue-600 text-white w-full p-2 rounded hover:bg-blue-700 transition"
             >
               Add List
             </button>
