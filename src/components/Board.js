@@ -28,10 +28,10 @@ export default function Board({ boardId }) {
       collection(db, "boards", boardId, "lists"),
       (snap) => {
 
-        const data = snap.docs.map(d => ({
-          id: d.id,
-          ...d.data(),
-          cards: d.data().cards || []
+        const data = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          cards: doc.data().cards || []
         }));
 
         setLists(data);
@@ -40,8 +40,9 @@ export default function Board({ boardId }) {
 
     return () => unsub();
 
+    // ✅ prevents Vercel CI eslint failure
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [boardId]);   // ✅ Vercel-safe dependency
+  }, [boardId]);
 
 
   /* ================= ADD LIST ================= */
@@ -52,14 +53,17 @@ export default function Board({ boardId }) {
 
     await addDoc(
       collection(db, "boards", boardId, "lists"),
-      { title, cards: [] }
+      {
+        title,
+        cards: []
+      }
     );
 
     setTitle("");
   };
 
 
-  /* ================= FIRESTORE SYNC ================= */
+  /* ================= SYNC FIRESTORE ================= */
 
   const syncFirestore = async (updatedLists) => {
 
@@ -83,7 +87,13 @@ export default function Board({ boardId }) {
 
       <DndContext collisionDetection={closestCenter}>
 
-        <div className="flex gap-6 p-8 overflow-x-auto min-h-screen bg-gradient-to-br from-rose-200 via-pink-200 to-fuchsia-200 items-start">
+        <div className="
+          flex gap-6 p-8 overflow-x-auto
+          min-h-screen
+          bg-gradient-to-br
+          from-rose-200 via-pink-200 to-fuchsia-200
+          items-start
+        ">
 
           {lists.map(list => (
             <List
@@ -93,6 +103,8 @@ export default function Board({ boardId }) {
               syncFirestore={syncFirestore}
             />
           ))}
+
+          {/* ADD LIST CARD */}
 
           <div className="bg-white/80 backdrop-blur rounded-lg p-3 w-[280px] shadow">
 
